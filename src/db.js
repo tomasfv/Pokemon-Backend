@@ -2,43 +2,55 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');			//importo el modulo de sequelize.
 const fs = require('fs');
 const path = require('path');
-const { DB_USER, DB_PASSWORD, DB_HOSTPG, DB_NAME, DB_DATABASE, DB_PORT } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOSTPG, DB_NAME, DB_DATABASE, DB_PORT, DB_DEPLOY } = process.env;
 //DEPLOY
-let sequelize =
-	// process.env.NODE_ENV === 'production'
-	// 	? new Sequelize({
-	// 			database: DB_NAME,
-	// 			dialect: 'postgres',
-	// 			host: DB_HOSTPG,
-	// 			port: 6224,
-	// 			username: DB_USER,
-	// 			password: DB_PASSWORD,
-	// 			pool: {
-	// 				max: 3,
-	// 				min: 1,
-	// 				idle: 10000,
-	// 			},
-	// 			dialectOptions: {
-	// 				ssl: {
-	// 					require: true,
-	// 					// Ref.: https://github.com/brianc/node-postgres/issues/2009
-	// 					rejectUnauthorized: false,
-	// 				},
-	// 				keepAlive: true,
-	// 			},
-	// 			ssl: true,
-	// 	  }) :
-		new Sequelize(
-				// `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,		//datos del .env. Logging
-				`postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOSTPG}:${DB_PORT}/${DB_DATABASE}`,
-				{ logging: false, native: false }
-		  );
+// let sequelize =
+// 	process.env.NODE_ENV === 'production'
+// 		? new Sequelize({
+// 				database: DB_NAME,
+// 				dialect: 'postgres',
+// 				host: DB_HOSTPG,
+// 				port: 6224,
+// 				username: DB_USER,
+// 				password: DB_PASSWORD,
+// 				pool: {
+// 					max: 3,
+// 					min: 1,
+// 					idle: 10000,
+// 				},
+// 				dialectOptions: {
+// 					ssl: {
+// 						require: true,
+// 						// Ref.: https://github.com/brianc/node-postgres/issues/2009
+// 						rejectUnauthorized: false,
+// 					},
+// 					keepAlive: true,
+// 				},
+// 				ssl: true,
+// 		  }) :
+// 		new Sequelize(
+// 				`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`,		//datos del .env. Logging
+// 				{ logging: false, native: false }
+// 		  );
 
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 // });
+
+const sequelize = new Sequelize(
+	
+	DB_DEPLOY,
+	{ logging: false, native: false}
+);
 //DEPLOY---------------------------------------------------------------------------------------------------------
+// const sequelize = new Sequelize(
+// 	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOSTPG}/pokemons`,
+// 	{
+// 	  logging: false, // set to console.log to see the raw SQL queries
+// 	  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// 	}
+//   );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

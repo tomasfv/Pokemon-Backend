@@ -38,7 +38,7 @@ const { DB_USER, DB_PASSWORD, DB_HOSTPG, DB_NAME, DB_DATABASE, DB_PORT, DB_DEPLO
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 // });
 
-const sequelize = new Sequelize(
+var sequelize = new Sequelize(
 	
 	DB_DEPLOY,
 	{ logging: false, native: false}

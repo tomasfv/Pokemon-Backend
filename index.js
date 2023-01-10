@@ -23,7 +23,7 @@ const { conn } = require('./src/db.js');      //importo la conexión sequelize
 const port = process.env.PORT || 3001;
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {       //.sync() sincroniza los modelos con la db  //true por default, false para el deploy
+conn.sync({ force: true }).then(() => {       //.sync() sincroniza los modelos con la db  //true por default, false para el deploy
   // server.listen(process.env.PORT || 3001, () => {  //puerto 3001 para el back y db         //DEPLOY
     server.listen(port, () => {  //puerto 3001 para el back y db         
     console.log(`%s listening at ${port}`); // eslint-disable-line no-console
